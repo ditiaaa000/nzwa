@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nazwa Natania</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <title>Halo Nazwa Natania! 🎀</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap');
 
         :root {
-            --primary: #ff4d6d;
-            --bg: #0f0f1b;
+            --pink-soft: #ffdde1;
+            --pink-bold: #ff4d6d;
+            --white: #ffffff;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--bg);
-            font-family: 'Montserrat', sans-serif;
-            color: white;
+            background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+            font-family: 'Quicksand', sans-serif;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -26,193 +25,176 @@
             overflow: hidden;
         }
 
-        /* Background Animasi Gradient */
-        .bg-glow {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 400px;
-            height: 400px;
-            background: var(--primary);
-            filter: blur(150px);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0.2;
-            z-index: -1;
-            animation: pulseBg 8s infinite alternate;
-        }
-
-        @keyframes pulseBg {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
-            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.4; }
-        }
-
-        /* Glass Card */
-        .card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            padding: 40px;
-            border-radius: 24px;
+        /* Container Gemas */
+        .container {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 40px;
+            border: 5px solid var(--white);
             text-align: center;
-            width: 350px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            transition: 0.5s;
+            max-width: 400px;
+            width: 85%;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Foto/Emoji Besar */
+        .header-icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
         h1 {
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 10px;
-            font-size: 2rem;
+            font-family: 'Fredoka One', cursive;
+            color: var(--pink-bold);
+            font-size: 1.8rem;
+            margin: 0;
         }
 
-        .status {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--primary);
-            margin-bottom: 30px;
-            display: block;
+        p {
+            color: #7d5a5a;
+            font-weight: 500;
+            line-height: 1.5;
+            margin: 20px 0;
+            font-size: 1.1rem;
         }
 
-        #message {
-            font-weight: 300;
-            line-height: 1.6;
-            font-size: 1rem;
-            min-height: 80px;
-            margin-bottom: 30px;
-        }
-
-        /* Button Styling */
-        .btn-group {
+        /* Tombol Lucu */
+        .btn-box {
             display: flex;
-            gap: 15px;
-            justify-content: center;
-            position: relative;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
         }
 
         button {
-            padding: 12px 25px;
-            border-radius: 12px;
+            padding: 15px 30px;
+            border-radius: 30px;
             border: none;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1rem;
             cursor: pointer;
-            font-weight: 600;
-            font-family: 'Montserrat', sans-serif;
             transition: 0.3s;
+            width: 100%;
         }
 
-        #btnYes {
-            background: var(--primary);
+        #btnNext {
+            background: var(--pink-bold);
             color: white;
-            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3);
+            box-shadow: 0 8px 0 #c9184a;
         }
 
-        #btnNo {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            position: relative;
+        #btnNext:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 #c9184a;
         }
 
-        /* Lucu: Tombol 'No' lari */
-        #btnNo.move {
+        #btnGak {
+            background: #eee;
+            color: #999;
+            font-size: 0.8rem;
+            width: 60%;
+        }
+
+        /* Animasi Emot Terbang */
+        .emoji-fly {
             position: absolute;
-        }
-
-        /* Floating Hearts */
-        .floating-heart {
-            position: absolute;
-            font-size: 20px;
             pointer-events: none;
-            z-index: -1;
-            animation: floatUp 4s linear forwards;
+            z-index: 1;
+            animation: flyUp 4s linear forwards;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        @keyframes flyUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
         }
+
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
-
-    <div class="card" id="mainCard">
-        <span class="status">Private Message</span>
-        <h1>Hi, Nazwa.</h1>
-        <p id="message">Lagi sibuk gak? Ada sesuatu yang mau gue bilang...</p>
+    <div class="container" id="card">
+        <div class="header-icon" id="icon">🌸</div>
+        <h1 id="title">Halo Nazwa! ✨</h1>
+        <p id="text">Tebak deh, siapa orang paling lucu, pinter, sama keren yang gue kenal hari ini? 🤔🌻</p>
         
-        <div class="btn-group" id="btnContainer">
-            <button id="btnYes" onclick="nextStep()">Apaan?</button>
-            <button id="btnNo" onmouseover="moveButton()">Gak</button>
+        <div class="btn-box">
+            <button id="btnNext" onclick="nextAction()">Siapa tuh? 🧐</button>
+            <button id="btnGak" onmouseover="kabur()">Gak mau tau 😜</button>
         </div>
     </div>
 
     <script>
-        const messageText = document.getElementById('message');
-        const btnYes = document.getElementById('btnYes');
-        const btnNo = document.getElementById('btnNo');
         let step = 0;
+        const emojis = ['💖', '✨', '🎀', '🧸', '🍭', '🍓', '🐣', '🌈'];
 
-        // Fungsi biar tombol No lari (Lucu)
-        function moveButton() {
-            if (step < 2) {
-                const x = Math.random() * (window.innerWidth - 100);
-                const y = Math.random() * (window.innerHeight - 50);
-                btnNo.classList.add('move');
-                btnNo.style.left = `${x}px`;
-                btnNo.style.top = `${y}px`;
-            }
-        }
-
-        function nextStep() {
+        function nextAction() {
             step++;
+            const title = document.getElementById('title');
+            const text = document.getElementById('text');
+            const btn = document.getElementById('btnNext');
+            const icon = document.getElementById('icon');
+            const btnGak = document.getElementById('btnGak');
+
             if (step === 1) {
-                messageText.style.opacity = 0;
-                setTimeout(() => {
-                    messageText.innerHTML = "Sebenernya gak penting-penting banget sih, cuma mau bilang kalau lo itu keren banget hari ini. ⚡";
-                    btnYes.innerHTML = "Masa sih?";
-                    messageText.style.opacity = 1;
-                }, 300);
+                icon.innerHTML = "👀";
+                title.innerHTML = "Coba Ngaca..";
+                text.innerHTML = "Jawabannya ya <b>Nazwa Natania</b> lah! Masa tetangga sebelah? Wkwk 😆✌️";
+                btn.innerHTML = "Ih apaan sih! 🙈";
+                spawnEmojis();
             } 
             else if (step === 2) {
-                messageText.style.opacity = 0;
-                setTimeout(() => {
-                    messageText.innerHTML = "Iya serius. Stay awesome ya, Nazwa Natania. <br><br> <b>I love you!</b> ❤️";
-                    btnYes.innerHTML = "Love you too!";
-                    btnNo.style.display = "none";
-                    messageText.style.opacity = 1;
-                    triggerConfetti();
-                }, 300);
+                icon.innerHTML = "🧸";
+                title.innerHTML = "Hehe..";
+                text.innerHTML = "Gue cuma mau bilang makasih ya udah jadi orang paling asik. Semangat terus buat hari ini! 💪🎀";
+                btn.innerHTML = "Makasih Aditya! 🍬";
+                btnGak.style.display = "none";
             }
             else if (step === 3) {
-                // Ending
-                document.getElementById('mainCard').style.transform = "scale(0.9)";
-                messageText.innerHTML = "Cieee senyum-senyum sendiri pas baca ini! <br> Kabarin ya kalau udah baca. 😉";
-                btnYes.style.display = "none";
-                setInterval(createHeart, 200);
+                icon.innerHTML = "💝";
+                title.innerHTML = "Last One!";
+                text.innerHTML = "I Love You, Nazwa! Don't forget to be happy today! 🍦🌷✨";
+                btn.innerHTML = "Love you too! 😍";
+                setInterval(spawnEmojis, 300);
+            }
+            else {
+                alert("Cieee ada yang senyum-senyum! 😋💕");
             }
         }
 
-        function triggerConfetti() {
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#ff4d6d', '#ffffff', '#ff8fa3']
-            });
+        // Fungsi tombol lari (lucu)
+        function kabur() {
+            const btnGak = document.getElementById('btnGak');
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            btnGak.style.position = "fixed";
+            btnGak.style.left = x + "px";
+            btnGak.style.top = y + "px";
         }
 
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('floating-heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.top = '100vh';
-            heart.style.opacity = Math.random();
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 4000);
+        // Fungsi bikin emot terbang banyak
+        function spawnEmojis() {
+            for(let i=0; i<10; i++) {
+                setTimeout(() => {
+                    const e = document.createElement('div');
+                    e.className = 'emoji-fly';
+                    e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                    e.style.left = Math.random() * 100 + "vw";
+                    e.style.top = "100vh";
+                    e.style.fontSize = (Math.random() * 20 + 20) + "px";
+                    document.body.appendChild(e);
+                    setTimeout(() => e.remove(), 4000);
+                }, i * 100);
+            }
         }
     </script>
 </body>
