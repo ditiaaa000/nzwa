@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Nazwa ❤️</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Particle effect */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 45, 85, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-100px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+        }
+
+        /* Desain Hati dengan Glow */
+        .heart {
+            position: relative;
+            width: 120px;
+            height: 108px;
+            background-color: #ff2d55;
+            margin: 0 auto 30px;
+            transform: rotate(-45deg);
+            cursor: pointer;
+            filter: drop-shadow(0 0 30px #ff2d55) brightness(1.2);
+            transition: filter 0.3s ease;
+        }
+
+        .heart:hover {
+            filter: drop-shadow(0 0 50px #ff6b81) brightness(1.5);
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background-color: #ff2d55;
+            border-radius: 50%;
+            filter: inherit;
+        }
+
+        .heart::before {
+            top: -60px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: 60px;
+        }
+
+        /* Lingkaran glow di sekitar hati */
+        .glow-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border: 2px solid rgba(255, 45, 85, 0.3);
+            border-radius: 50%;
+            animation: ringPulse 2s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes ringPulse {
+            0% {
+                width: 140px;
+                height: 140px;
+                border-color: rgba(255, 45, 85, 0.8);
+                box-shadow: 0 0 30px rgba(255, 45, 85, 0.5);
+            }
+
+            50% {
+                width: 200px;
+                height: 200px;
+                border-color: rgba(255, 45, 85, 0.2);
+                box-shadow: 0 0 60px rgba(255, 45, 85, 0.8);
+            }
+
+            100% {
+                width: 140px;
+                height: 140px;
+                border-color: rgba(255, 45, 85, 0.8);
+                box-shadow: 0 0 30px rgba(255, 45, 85, 0.5);
+            }
+        }
+
+        /* Animasi Berdenyut lebih dinamis */
+        .pulse {
+            animation: heartbeat 1.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: rotate(-45deg) scale(1);
+            }
+
+            15% {
+                transform: rotate(-45deg) scale(1.3);
+            }
+
+            30% {
+                transform: rotate(-45deg) scale(1);
+            }
+
+            45% {
+                transform: rotate(-45deg) scale(1.2);
+            }
+
+            60% {
+                transform: rotate(-45deg) scale(1);
+            }
+
+            100% {
+                transform: rotate(-45deg) scale(1);
+            }
+        }
+
+        /* Teks dengan animasi */
+        .text-wrapper {
+            position: relative;
+            margin-top: 40px;
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin: 0;
+            opacity: 0;
+            text-shadow: 0 0 20px #ff2d55, 0 0 40px #ff2d55, 0 0 60px #ff2d55;
+            letter-spacing: 3px;
+            position: relative;
+            animation: textGlow 2s infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 20px #ff2d55, 0 0 40px #ff2d55, 0 0 60px #ff2d55;
+            }
+
+            to {
+                text-shadow: 0 0 30px #ff6b81, 0 0 50px #ff6b81, 0 0 70px #ff6b81;
+            }
+        }
+
+        /* Subtitle */
+        .subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            margin-top: 15px;
+            opacity: 0;
+            text-shadow: 0 0 10px rgba(255, 45, 85, 0.5);
+            letter-spacing: 2px;
+        }
+
+        /* Love count */
+        .love-count {
+            color: #ff2d55;
+            font-size: 1.5rem;
+            margin-top: 20px;
+            font-weight: bold;
+            opacity: 0;
+            text-shadow: 0 0 15px #ff2d55;
+        }
+
+        /* Efek ledakan hati */
+        .explosion-particle {
+            position: absolute;
+            background: #ff2d55;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: explode 1s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0) translate(var(--tx), var(--ty));
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <div style="position: relative;">
+            <div class="glow-ring"></div>
+            <div class="heart pulse" id="loveHeart"></div>
+        </div>
+
+        <div class="text-wrapper">
+            <h1 id="textDisplay">I LOVE YOU NAZWA</h1>
+        </div>
+
+        <div class="subtitle" id="subtitle">My Love for You is Infinite ❤️</div>
+        <div class="love-count" id="loveCount">❤️ 0 x Love</div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            let clickCount = 0;
+
+            // Create floating particles
+            function createParticle() {
+                const particle = $('<div class="particle"></div>');
+                const size = Math.random() * 8 + 2;
+                const left = Math.random() * 100;
+                const duration = Math.random() * 5 + 3;
+
+                particle.css({
+                    width: size + 'px',
+                    height: size + 'px',
+                    left: left + '%',
+                    opacity: Math.random() * 0.5 + 0.3,
+                    animation: `float ${duration}s linear`
+                });
+
+                $('#particles').append(particle);
+
+                setTimeout(() => {
+                    particle.remove();
+                }, duration * 1000);
+            }
+
+            // Create particles every 300ms
+            setInterval(createParticle, 300);
+
+            // Animasi muncul dengan efek lebih dramatis
+            $("#textDisplay").css({
+                opacity: 0,
+                transform: "scale(0.5)"
+            }).delay(500).animate({
+                opacity: 1,
+                fontSize: "2.5rem"
+            }, 1500, "swing").promise().then(() => {
+                // Tambah subtitle setelah teks utama muncul
+                $("#subtitle").animate({
+                    opacity: 1
+                }, 1000);
+            });
+
+            // Fungsi untuk efek ledakan hati kecil
+            function createExplosion(x, y) {
+                for (let i = 0; i < 12; i++) {
+                    const particle = $('<div class="explosion-particle"></div>');
+                    const angle = (i / 12) * Math.PI * 2;
+                    const distance = 80 + Math.random() * 50;
+                    const tx = Math.cos(angle) * distance;
+                    const ty = Math.sin(angle) * distance;
+
+                    particle.css({
+                        position: 'fixed',
+                        left: x + 'px',
+                        top: y + 'px',
+                        width: '8px',
+                        height: '8px',
+                        '--tx': tx + 'px',
+                        '--ty': ty + 'px',
+                        background: `hsl(${Math.random() * 20 + 340}, 100%, 65%)`,
+                        boxShadow: '0 0 15px currentColor',
+                        zIndex: 1000
+                    });
+
+                    $('body').append(particle);
+
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 1000);
+                }
+            }
+
+            // Efek interaksi super saat hati diklik
+            $("#loveHeart").click(function (e) {
+                // Hitung klik
+                clickCount++;
+                $("#loveCount").text(`❤️ ${clickCount} x Love`).animate({
+                    opacity: 1
+                }, 200);
+
+                // Posisi mouse untuk efek ledakan
+                const rect = this.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                // Multiple animasi hati
+                $(this).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+
+                // Efek ledakan
+                createExplosion(centerX, centerY);
+
+                // Ubah warna teks dengan transisi
+                $("#textDisplay").css({
+                    color: "#ff6b81",
+                    transition: "color 0.3s ease"
+                });
+
+                // Tambah pulse extra pada teks
+                $("#textDisplay, .subtitle").animate({
+                    fontSize: "+=0.2rem"
+                }, 150).animate({
+                    fontSize: "-=0.2rem"
+                }, 150);
+
+                // Buat hati kecil ekstra
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        createExplosion(
+                            centerX + (Math.random() - 0.5) * 100,
+                            centerY + (Math.random() - 0.5) * 100
+                        );
+                    }, i * 100);
+                }
+
+                // Efek getaran pada container
+                $(".container").animate({
+                    marginLeft: "-=5px",
+                    marginTop: "-=5px"
+                }, 50).animate({
+                    marginLeft: "+=10px",
+                    marginTop: "+=10px"
+                }, 50).animate({
+                    marginLeft: "-=5px",
+                    marginTop: "-=5px"
+                }, 50);
+            });
+
+            // Double klik efek spesial
+            $("#loveHeart").on("dblclick", function (e) {
+                const rect = this.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                // Ledakan besar
+                for (let i = 0; i < 30; i++) {
+                    setTimeout(() => {
+                        createExplosion(
+                            centerX + (Math.random() - 0.5) * 200,
+                            centerY + (Math.random() - 0.5) * 200
+                        );
+                    }, i * 30);
+                }
+
+                // Ganti teks sementara
+                const originalText = $("#textDisplay").text();
+                $("#textDisplay").text("NAZWA I LOVE YOU! ❤️");
+                setTimeout(() => {
+                    $("#textDisplay").text(originalText);
+                }, 1000);
+
+                // Ubah warna background sementara
+                $("body").css({
+                    background: "linear-gradient(135deg, #ff2d55 0%, #1a1a2e 100%)",
+                    transition: "background 1s ease"
+                });
+
+                setTimeout(() => {
+                    $("body").css({
+                        background: "linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%)"
+                    });
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+
+</html>
