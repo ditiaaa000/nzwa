@@ -11,12 +11,13 @@
             --pink-soft: #ffdde1;
             --pink-bold: #ff4d6d;
             --white: #ffffff;
+            --text-color: #7d5a5a;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+            background: linear-gradient(135deg, #fff5f5 0%, #ffdde1 100%);
             font-family: 'Quicksand', sans-serif;
             height: 100vh;
             display: flex;
@@ -25,32 +26,32 @@
             overflow: hidden;
         }
 
-        /* Container Gemas */
+        /* Container Bubble */
         .container {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
             padding: 40px 30px;
-            border-radius: 40px;
-            border: 5px solid var(--white);
+            border-radius: 50px;
+            border: 8px solid var(--pink-soft);
             text-align: center;
-            max-width: 400px;
+            max-width: 380px;
             width: 85%;
-            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.15);
             position: relative;
             z-index: 10;
+            transition: all 0.5s ease;
         }
 
-        /* Foto/Emoji Besar */
+        /* Ikon Animasi */
         .header-icon {
-            font-size: 70px;
-            margin-bottom: 20px;
+            font-size: 80px;
+            margin-bottom: 15px;
             display: inline-block;
-            animation: bounce 2s infinite;
+            animation: floatAnim 3s infinite ease-in-out;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+        @keyframes floatAnim {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
         }
 
         h1 {
@@ -58,59 +59,66 @@
             color: var(--pink-bold);
             font-size: 1.8rem;
             margin: 0;
+            letter-spacing: 1px;
         }
 
         p {
-            color: #7d5a5a;
-            font-weight: 500;
-            line-height: 1.5;
-            margin: 20px 0;
+            color: var(--text-color);
+            font-weight: 700;
+            line-height: 1.6;
+            margin: 25px 0;
             font-size: 1.1rem;
         }
 
-        /* Tombol Lucu */
+        /* Tombol Bubble */
         .btn-box {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             align-items: center;
         }
 
         button {
-            padding: 15px 30px;
-            border-radius: 30px;
+            padding: 18px 30px;
+            border-radius: 40px;
             border: none;
             font-family: 'Fredoka One', cursive;
-            font-size: 1rem;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             width: 100%;
         }
 
         #btnNext {
             background: var(--pink-bold);
             color: white;
-            box-shadow: 0 8px 0 #c9184a;
+            box-shadow: 0 10px 0 #e63958;
+        }
+
+        #btnNext:hover {
+            transform: scale(1.05);
+            background: #ff5e7d;
         }
 
         #btnNext:active {
-            transform: translateY(4px);
-            box-shadow: 0 4px 0 #c9184a;
+            transform: translateY(6px);
+            box-shadow: 0 4px 0 #e63958;
         }
 
         #btnGak {
-            background: #eee;
-            color: #999;
-            font-size: 0.8rem;
-            width: 60%;
+            background: #f0f0f0;
+            color: #bbb;
+            font-size: 0.85rem;
+            width: 50%;
+            transition: 0.1s;
         }
 
-        /* Animasi Emot Terbang */
-        .emoji-fly {
+        /* Dekorasi Melayang */
+        .decoration {
             position: absolute;
             pointer-events: none;
             z-index: 1;
-            animation: flyUp 4s linear forwards;
+            animation: flyUp 5s linear forwards;
         }
 
         @keyframes flyUp {
@@ -118,24 +126,39 @@
             100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
         }
 
+        /* Efek Berkilau */
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff, 0 0 20px #fff;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
     </style>
 </head>
 <body>
 
     <div class="container" id="card">
-        <div class="header-icon" id="icon">🌸</div>
+        <div class="header-icon" id="icon">🍓</div>
         <h1 id="title">Halo Nazwa! ✨</h1>
-        <p id="text">Tebak deh, siapa orang paling lucu, pinter, sama keren yang gue kenal hari ini? 🤔🌻</p>
+        <p id="text">Tebak deh, siapa orang paling lucu, pinter, sama keren yang aku kenal hari ini? 🤔🌻</p>
         
         <div class="btn-box">
             <button id="btnNext" onclick="nextAction()">Siapa tuh? 🧐</button>
-            <button id="btnGak" onmouseover="kabur()">Gak mau tau 😜</button>
+            <button id="btnGak" onmouseover="kabur()">Enggak mau tau 😜</button>
         </div>
     </div>
 
     <script>
         let step = 0;
-        const emojis = ['💖', '✨', '🎀', '🧸', '🍭', '🍓', '🐣', '🌈'];
+        const decorations = ['💖', '✨', '🎀', '🧸', '🍭', '🍓', '🐣', '🌈', '🍦', '🌷'];
 
         function nextAction() {
             step++;
@@ -144,56 +167,66 @@
             const btn = document.getElementById('btnNext');
             const icon = document.getElementById('icon');
             const btnGak = document.getElementById('btnGak');
+            const card = document.getElementById('card');
+
+            // Sound effect trick (browser must have interaction first)
+            spawnDecor();
 
             if (step === 1) {
                 icon.innerHTML = "👀";
-                title.innerHTML = "Coba Ngaca..";
-                text.innerHTML = "Jawabannya ya <b>Nazwa Natania</b> lah! Masa tetangga sebelah? Wkwk 😆✌️";
-                btn.innerHTML = "Ih apaan sih! 🙈";
-                spawnEmojis();
+                title.innerHTML = "Coba deh ngaca..";
+                text.innerHTML = "Jawabannya ya <b>Nazwa Natania</b> lah! Masa tetangga sebelah? Hehe 😆✌️";
+                btn.innerHTML = "Ih kamu bisa aja! 🙈";
+                card.style.borderColor = "#ffc8dd";
             } 
             else if (step === 2) {
                 icon.innerHTML = "🧸";
                 title.innerHTML = "Hehe..";
-                text.innerHTML = "Gue cuma mau bilang makasih ya udah jadi orang paling asik. Semangat terus buat hari ini! 💪🎀";
+                text.innerHTML = "Aku cuma mau bilang makasih ya kamu udah jadi orang paling asik. Semangat terus buat hari ini! 💪🎀";
                 btn.innerHTML = "Makasih Aditya! 🍬";
                 btnGak.style.display = "none";
+                card.style.borderColor = "#bde0fe";
             }
             else if (step === 3) {
                 icon.innerHTML = "💝";
-                title.innerHTML = "Last One!";
-                text.innerHTML = "I Love You, Nazwa! Don't forget to be happy today! 🍦🌷✨";
-                btn.innerHTML = "Love you too! 😍";
-                setInterval(spawnEmojis, 300);
+                title.innerHTML = "Satu lagi..";
+                text.innerHTML = "Aku sayang banget sama kamu, Nazwa! Pokoknya hari ini kamu harus bahagia terus ya! 🍦🌷✨";
+                btn.innerHTML = "Sayang kamu juga! 😍";
+                setInterval(spawnDecor, 300);
             }
             else {
-                alert("Cieee ada yang senyum-senyum! 😋💕");
+                title.innerHTML = "Ciee! 😋";
+                text.innerHTML = "Ada yang senyum-senyum sendiri nih baca ini! Kabarin aku ya kalau udah dibuka~ 💕";
+                btn.style.display = "none";
+                icon.innerHTML = "🐱✨";
             }
         }
 
-        // Fungsi tombol lari (lucu)
+        // Tombol kabur (lebih responsif)
         function kabur() {
             const btnGak = document.getElementById('btnGak');
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 50);
+            const x = Math.random() * (window.innerWidth - btnGak.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btnGak.offsetHeight);
             btnGak.style.position = "fixed";
             btnGak.style.left = x + "px";
             btnGak.style.top = y + "px";
+            btnGak.innerHTML = "Eits gak bisa! 😝";
         }
 
-        // Fungsi bikin emot terbang banyak
-        function spawnEmojis() {
-            for(let i=0; i<10; i++) {
+        // Fungsi dekorasi terbang
+        function spawnDecor() {
+            const count = step === 3 ? 15 : 6;
+            for(let i=0; i<count; i++) {
                 setTimeout(() => {
                     const e = document.createElement('div');
-                    e.className = 'emoji-fly';
-                    e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                    e.className = 'decoration';
+                    e.innerHTML = decorations[Math.floor(Math.random() * decorations.length)];
                     e.style.left = Math.random() * 100 + "vw";
                     e.style.top = "100vh";
-                    e.style.fontSize = (Math.random() * 20 + 20) + "px";
+                    e.style.fontSize = (Math.random() * 25 + 20) + "px";
                     document.body.appendChild(e);
-                    setTimeout(() => e.remove(), 4000);
-                }, i * 100);
+                    setTimeout(() => e.remove(), 5000);
+                }, i * 150);
             }
         }
     </script>
