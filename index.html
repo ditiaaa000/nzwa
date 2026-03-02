@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hai Nazwa Natania! ✨</title>
+    <title>Special for Nazwa Natania ✨</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Varela+Round&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&family=Dancing+Script:wght@700&display=swap');
 
         :root {
-            --accent: #ff85a1;
-            --bg-gradient: linear-gradient(135deg, #fce4ec 0%, #ffebee 100%);
-            --glass: rgba(255, 255, 255, 0.7);
+            --primary: #ff477e;
+            --secondary: #ff85a1;
+            --bg: #fff0f3;
         }
 
         body {
@@ -22,186 +22,187 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Quicksand', sans-serif;
-            background: var(--bg-gradient);
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
             overflow: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(343, 100%, 76%, 0.15) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(343, 100%, 76%, 0.15) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(343, 100%, 76%, 0.15) 0, transparent 50%);
         }
 
-        /* Latar Belakang Animasi Bulatan Lucu */
-        .bubble {
-            position: absolute;
-            background: rgba(255, 133, 161, 0.2);
-            border-radius: 50%;
-            filter: blur(20px);
-            z-index: 1;
-            animation: move 20s infinite alternate;
-        }
-
-        @keyframes move {
-            from { transform: translate(0, 0); }
-            to { transform: translate(100px, 100px); }
-        }
-
-        /* Card Utama */
-        .main-card {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            border: 4px solid white;
+        /* Card Modern Floating */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.8);
             border-radius: 40px;
-            padding: 40px;
+            padding: 50px 30px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(255, 133, 161, 0.2);
-            width: 320px;
-            position: relative;
+            width: 340px;
+            box-shadow: 0 25px 50px -12px rgba(255, 71, 126, 0.25);
             z-index: 10;
-            animation: cardPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: float 6s ease-in-out infinite;
         }
 
-        @keyframes cardPop {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
         }
 
-        .avatar {
-            font-size: 80px;
+        .heart-icon {
+            font-size: 60px;
             margin-bottom: 20px;
-            display: block;
-            animation: swing 3s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px var(--primary));
+            animation: pulse 1.5s infinite;
         }
 
-        @keyframes swing {
-            0%, 100% { transform: rotate(-10deg); }
-            50% { transform: rotate(10deg); }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         h1 {
-            font-family: 'Varela Round', sans-serif;
-            color: #ff4d6d;
-            font-size: 1.6rem;
-            margin: 0;
+            font-weight: 800;
+            color: #4a0e0e;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
         }
 
         p {
-            color: #880e4f;
-            font-weight: 700;
+            color: #5d4037;
             font-size: 1.1rem;
-            margin: 20px 0;
+            line-height: 1.6;
+            margin-bottom: 30px;
         }
 
-        /* Tombol Modern */
-        .btn-start {
-            background: #ff4d6d;
+        /* Button Aesthetic */
+        .btn-fancy {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            padding: 15px 40px;
-            border-radius: 25px;
-            font-family: 'Varela Round', sans-serif;
-            font-size: 1.1rem;
+            padding: 16px 35px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3);
-            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(255, 71, 126, 0.3);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .btn-start:hover {
-            transform: translateY(-5px) scale(1.05);
-            background: #ff758f;
+        .btn-fancy:hover {
+            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 0 15px 30px rgba(255, 71, 126, 0.4);
         }
 
-        /* Styling Custom untuk SweetAlert */
-        .my-popup {
-            border-radius: 30px !important;
-            font-family: 'Quicksand', sans-serif !important;
+        /* Floating Elements */
+        .decor {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.5;
+            z-index: 1;
         }
+
     </style>
 </head>
 <body>
 
-    <div class="bubble" style="width: 200px; height: 200px; top: 10%; left: 10%;"></div>
-    <div class="bubble" style="width: 150px; height: 150px; bottom: 10%; right: 10%; animation-delay: -5s;"></div>
-
-    <div class="main-card">
-        <span class="avatar">🐱✨</span>
-        <h1>Hai Nazwa!</h1>
-        <p>Ada pesan kecil dari aku untuk kamu. Dibuka ya? 💌</p>
-        <button class="btn-start" onclick="startStory()">Klik di Sini ✨</button>
+    <div class="glass-card">
+        <div class="heart-icon">💖</div>
+        <h1>Hai, <span class="highlight">Nazwa Natania</span></h1>
+        <p>Aku punya sesuatu yang gak bisa diungkapkan lewat kata-kata biasa. Mau lihat? ✨</p>
+        <button class="btn-fancy" onclick="startJourney()">Buka Pesannya 💌</button>
     </div>
 
     <script>
-        async function startStory() {
-            // Popup 1
+        async function startJourney() {
+            // Popup 1: Hook
             await Swal.fire({
-                title: 'Tebak Deh! 🐣',
-                text: 'Kamu tahu gak siapa orang paling baik dan paling cantik yang aku kenal?',
-                imageUrl: 'https://cdn-icons-png.flaticon.com/512/3663/3663737.png',
-                imageWidth: 100,
-                confirmButtonText: 'Siapa tuh? 🤔',
-                confirmButtonColor: '#ff4d6d',
-                customClass: { popup: 'my-popup' },
-                showClass: { popup: 'animate__animated animate__zoomIn' }
+                title: 'Kamu Tahu Gak? 🍓',
+                text: 'Di antara miliaran orang di bumi, ada satu orang yang kehadirannya selalu berhasil bikin duniaku terasa jauh lebih tenang.',
+                confirmButtonText: 'Siapa itu? 👀',
+                confirmButtonColor: '#ff477e',
+                background: '#fffaff',
+                customClass: { popup: 'rounded-popup' }
             });
 
-            // Popup 2
+            // Popup 2: Reveal
             await Swal.fire({
-                title: 'Jawabannya...',
-                text: 'Ya Nazwa Natania lah! Orang yang lagi baca ini sekarang. Hehe 😋🍓',
-                imageUrl: 'https://cdn-icons-png.flaticon.com/512/3468/3468081.png',
+                title: 'Itu Kamu, Nazwa. ✨',
+                text: 'Melihat senyum kamu itu kayak dapet booster kebahagiaan paling ampuh buat aku. Kamu itu "limitless" indahnya.',
+                imageUrl: 'https://cdn-icons-png.flaticon.com/512/3656/3656824.png',
                 imageWidth: 100,
                 confirmButtonText: 'Masa sih? 🙈',
-                confirmButtonColor: '#ff4d6d',
-                customClass: { popup: 'my-popup' }
+                confirmButtonColor: '#ff477e',
+                background: '#fffaff'
             });
 
-            // Popup 3 (Ada tombol 'Nggak' yang lari kalau mau diklik)
-            const { value: confirm } = await Swal.fire({
-                title: 'Satu hal lagi.. 🧸',
-                text: 'Kamu tau gak kalau kehadiran kamu itu berharga banget buat aku?',
+            // Popup 3: Deep but Cute
+            const { value: response } = await Swal.fire({
+                title: 'Terima kasih ya.. 🧸',
+                text: 'Makasih udah jadi alasanku buat semangat setiap hari. Kamu mau kan tetap jadi rumah buat ceritaku selamanya?',
                 showCancelButton: true,
-                confirmButtonText: 'Iya tahu ❤️',
-                cancelButtonText: 'Enggak 😝',
-                confirmButtonColor: '#ff4d6d',
-                customClass: { popup: 'my-popup' },
-                // Logika tombol lari diimplementasikan secara sederhana di sini
+                confirmButtonText: 'Tentu dong! ❤️',
+                cancelButtonText: 'Nggak mau 😜',
+                confirmButtonColor: '#ff477e',
+                cancelButtonColor: '#cfd8dc',
             });
 
-            if (confirm) {
+            if (response) {
+                celebrate();
+            } else {
+                Swal.fire('Eits!', 'Gak ada pilihan "Nggak" ya buat kamu! Wleee 😝', 'error');
                 celebrate();
             }
         }
 
         function celebrate() {
-            // Meledakkan Confetti
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#ff4d6d', '#ff85a1', '#fbb1bd']
-            });
+            // Confetti Explosion
+            var duration = 5 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
-            // Final Popup
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+                var particleCount = 50 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+
+            // Final Message
             Swal.fire({
-                title: 'I Love You! 💝',
-                html: 'Makasih ya sudah jadi bagian dari hari-hari aku, Nazwa.<br><br><b>Tetap bahagia terus ya sayang!</b> 🍦🌈✨',
-                imageUrl: 'https://cdn-icons-png.flaticon.com/512/4359/4359963.png',
-                imageWidth: 120,
-                confirmButtonText: 'Sama-sama Aditya! 😍',
-                confirmButtonColor: '#ff4d6d',
-                customClass: { popup: 'my-popup' }
+                title: 'I Love You, Nazwa! 💝',
+                html: 'Hari ini, besok, dan seterusnya.. Kamu tetap jadi favorit aku.<br><br><span style="font-family:Dancing Script; font-size:1.5rem; color:#ff477e;">— Dari Aditya, yang beruntung memilikimu.</span>',
+                confirmButtonText: 'Love You Too, Aditya! 😍',
+                confirmButtonColor: '#ff477e',
+                backdrop: `rgba(255,133,161,0.4)`
             });
 
-            // Hujan emoji di background
-            setInterval(createFloatingEmoji, 300);
+            setInterval(createHeart, 300);
         }
 
-        function createFloatingEmoji() {
-            const emojis = ['💖', '🌸', '✨', '🍭', '🍓', '🧸'];
+        function createHeart() {
+            const symbols = ['💖', '✨', '🎀', '🌸', '🍭'];
             const e = document.createElement('div');
-            e.style.position = 'fixed';
-            e.style.bottom = '-50px';
+            e.className = 'decor';
+            e.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
             e.style.left = Math.random() * 100 + 'vw';
-            e.style.fontSize = Math.random() * 20 + 20 + 'px';
-            e.style.zIndex = '999';
-            e.style.pointerEvents = 'none';
-            e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            e.style.bottom = '-50px';
+            e.style.fontSize = Math.random() * 30 + 10 + 'px';
             document.body.appendChild(e);
 
             const anim = e.animate([
@@ -209,7 +210,7 @@
                 { transform: `translateY(-110vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
             ], {
                 duration: 4000 + Math.random() * 2000,
-                easing: 'linear'
+                easing: 'ease-out'
             });
 
             anim.onfinish = () => e.remove();
