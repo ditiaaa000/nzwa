@@ -3,16 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untuk Nazwa ❤️</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Untuk Nazwa Natania Tersayang</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500&display=swap');
 
         body {
             margin: 0;
@@ -21,349 +14,109 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle, #ffafbd, #ffc3a0);
+            font-family: 'Quicksand', sans-serif;
             overflow: hidden;
-            position: relative;
-        }
-
-        /* Stars Background (mengganti gambar dengan CSS) */
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .stars::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, white, transparent),
-                radial-gradient(2px 2px at 60px 70px, white, transparent),
-                radial-gradient(1px 1px at 50px 50px, white, transparent),
-                radial-gradient(1px 1px at 130px 80px, white, transparent),
-                radial-gradient(2px 2px at 90px 10px, white, transparent),
-                radial-gradient(2px 2px at 170px 150px, white, transparent),
-                radial-gradient(1px 1px at 200px 200px, white, transparent),
-                radial-gradient(2px 2px at 300px 100px, white, transparent),
-                radial-gradient(2px 2px at 400px 250px, white, transparent),
-                radial-gradient(1px 1px at 500px 300px, white, transparent);
-            background-size: 600px 600px;
-            animation: move-stars 200s linear infinite;
-            opacity: 0.8;
-        }
-
-        .twinkling {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            background: transparent;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .twinkling::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(3px 3px at 100px 100px, rgba(255,255,255,0.8), transparent),
-                radial-gradient(2px 2px at 200px 200px, rgba(255,255,255,0.6), transparent),
-                radial-gradient(3px 3px at 300px 150px, rgba(255,255,255,0.7), transparent),
-                radial-gradient(2px 2px at 400px 300px, rgba(255,255,255,0.5), transparent),
-                radial-gradient(3px 3px at 500px 250px, rgba(255,255,255,0.8), transparent);
-            background-size: 800px 800px;
-            animation: move-twinkling 150s linear infinite, twinkle 5s ease-in-out infinite;
-            opacity: 0.6;
-        }
-
-        @keyframes move-stars {
-            from { transform: translateY(0); }
-            to { transform: translateY(-2000px); }
-        }
-
-        @keyframes move-twinkling {
-            from { transform: translateY(0); }
-            to { transform: translateY(-2000px); }
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.8; }
-        }
-
-        /* Floating Hearts Background */
-        .floating-hearts {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .float-heart {
-            position: absolute;
-            color: rgba(255, 45, 85, 0.3);
-            font-size: 20px;
-            animation: float-heart 8s linear infinite;
-            text-shadow: 0 0 20px #ff2d55;
-        }
-
-        @keyframes float-heart {
-            0% {
-                transform: translateY(100vh) rotate(0deg) scale(0.5);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg) scale(1.5);
-                opacity: 0;
-            }
+            color: #d63384;
         }
 
         .container {
             text-align: center;
-            z-index: 10;
-            position: relative;
-            perspective: 1000px;
-        }
-
-        /* 3D Heart Container */
-        .heart-3d {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 50px;
-            transform-style: preserve-3d;
-            animation: rotate-3d 10s infinite linear;
-            cursor: pointer;
-            filter: drop-shadow(0 0 50px #ff2d55);
-            transition: transform 0.3s ease;
-        }
-
-        .heart-3d:hover {
-            filter: drop-shadow(0 0 70px #ff2d55) drop-shadow(0 0 100px #ff6b81);
-        }
-
-        @keyframes rotate-3d {
-            0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(-45deg); }
-            25% { transform: rotateX(10deg) rotateY(180deg) rotateZ(-45deg); }
-            50% { transform: rotateX(20deg) rotateY(360deg) rotateZ(-45deg); }
-            75% { transform: rotateX(10deg) rotateY(540deg) rotateZ(-45deg); }
-            100% { transform: rotateX(0deg) rotateY(720deg) rotateZ(-45deg); }
-        }
-
-        /* Modern Heart Design */
-        .heart-modern {
-            position: relative;
-            width: 200px;
-            height: 180px;
-            background: linear-gradient(135deg, #ff2d55, #ff6b81, #ff4757);
-            transform: rotate(-45deg);
-            border-radius: 20px 20px 0 20px;
-            box-shadow: 
-                0 0 100px #ff2d55,
-                0 0 200px #ff6b81,
-                inset 0 0 50px rgba(255,255,255,0.5);
-            animation: modern-pulse 1.5s ease-in-out infinite;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .heart-modern::before,
-        .heart-modern::after {
-            content: '';
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: inherit;
-            border-radius: 50%;
-            filter: brightness(1.2);
-        }
-
-        .heart-modern::before {
-            top: -100px;
-            left: 0;
-            box-shadow: 0 0 50px #ff2d55;
-        }
-
-        .heart-modern::after {
-            top: 0;
-            left: 100px;
-            box-shadow: 0 0 50px #ff2d55;
-        }
-
-        /* Inner Glow Effect */
-        .heart-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 150%;
-            height: 150%;
-            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,45,85,0) 70%);
-            border-radius: 50%;
-            animation: glow-pulse 2s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes glow-pulse {
-            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.8); }
-            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.2); }
-        }
-
-        @keyframes modern-pulse {
-            0%, 100% { transform: rotate(-45deg) scale(1); }
-            50% { transform: rotate(-45deg) scale(1.1); }
-        }
-
-        /* Sparkle Effect */
-        .sparkles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            animation: sparkle 3s linear infinite;
-        }
-
-        .sparkle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 20px white;
-            animation: sparkle-move 2s ease-out infinite;
-        }
-
-        @keyframes sparkle-move {
-            0% {
-                transform: scale(0) rotate(0deg);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1) rotate(180deg);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(0) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Text Styles */
-        .main-text {
-            margin-bottom: 30px;
-        }
-
-        .love-message {
-            font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
-            color: white;
-            text-shadow: 
-                0 0 10px #ff2d55,
-                0 0 20px #ff2d55,
-                0 0 40px #ff2d55,
-                0 0 80px #ff2d55;
-            animation: text-flicker 3s infinite, text-glow 4s ease-in-out infinite;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 0.5s ease;
-        }
-
-        .sub-message {
-            font-size: 1.8rem;
-            color: rgba(255, 255, 255, 0.9);
-            text-shadow: 0 0 20px #ff6b81;
-            font-weight: 300;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.5s ease;
-        }
-
-        @keyframes text-flicker {
-            0%, 100% { opacity: 1; text-shadow: 0 0 10px #ff2d55, 0 0 20px #ff2d55, 0 0 40px #ff2d55; }
-            33% { opacity: 0.9; text-shadow: 0 0 15px #ff6b81, 0 0 30px #ff6b81, 0 0 60px #ff6b81; }
-            66% { opacity: 1; text-shadow: 0 0 20px #ff4757, 0 0 40px #ff4757, 0 0 80px #ff4757; }
-        }
-
-        @keyframes text-glow {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        /* Love Counter */
-        .love-counter {
-            background: rgba(255, 45, 85, 0.2);
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            padding: 15px 30px;
-            display: inline-block;
-            margin-top: 30px;
-            box-shadow: 0 0 50px rgba(255, 45, 85, 0.3);
-            animation: counter-glow 2s infinite;
-            transition: all 0.3s ease;
+            z-index: 10;
+            max-width: 80%;
+            border: 2px solid #fff;
         }
 
-        .love-counter:hover {
-            box-shadow: 0 0 70px rgba(255, 45, 85, 0.6);
-            transform: scale(1.05);
-        }
-
-        .counter-number {
+        h1 {
+            font-family: 'Dancing Script', cursive;
             font-size: 3rem;
-            font-weight: bold;
-            color: white;
-            text-shadow: 0 0 20px #ff2d55;
-            margin-right: 10px;
-            transition: color 0.3s ease;
+            margin-bottom: 10px;
         }
 
-        .counter-text {
+        #typing-text {
             font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            letter-spacing: 2px;
+            line-height: 1.6;
+            min-height: 60px;
         }
 
-        @keyframes counter-glow {
-            0%, 100% { box-shadow: 0 0 30px rgba(255, 45, 85, 0.3); }
-            50% { box-shadow: 0 0 70px rgba(255, 45, 85, 0.8); }
+        .heart-icon {
+            font-size: 50px;
+            color: #e91e63;
+            animation: pulse 1.5s infinite;
         }
 
-        /* Particle Canvas */
-        #particleCanvas {
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Animasi Hati Jatuh */
+        .heart {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: -10px;
+            font-size: 20px;
+            user-select: none;
             pointer-events: none;
-            z-index: 5;
+            animation: fall linear forwards;
         }
 
-        /* Music Player (hidden) */
-        #musicPlayer
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="heart-icon">❤️</div>
+        <h1>Untuk Nazwa Natania</h1>
+        <div id="typing-text"></div>
+        <p style="margin-top: 20px; font-weight: bold;">— Dari Aditya</p>
+    </div>
+
+    <script>
+        // Pesan romantis
+        const message = "Nazwa, sejak ada kamu, duniaku jadi jauh lebih berwarna. Kamu adalah alasan tersenyumku setiap hari. Aku sayang banget sama kamu... ❤️";
+        const typingElement = document.getElementById('typing-text');
+        let index = 0;
+
+        // Efek Mengetik
+        function typeWriter() {
+            if (index < message.length) {
+                typingElement.innerHTML += message.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        // Animasi Hati Berjatuhan
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Jalankan fungsi
+        window.onload = () => {
+            typeWriter();
+            setInterval(createHeart, 300);
+        };
+    </script>
+</body>
+</html>
