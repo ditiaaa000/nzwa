@@ -3,316 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untuk Malaikatku, Nazwa Natania</title>
+    <title>Nazwa Natania</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap');
 
-        /* -- Setup Dasar -- */
-        body, html {
+        :root {
+            --primary: #ff4d6d;
+            --bg: #0f0f1b;
+        }
+
+        body {
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
+            background-color: var(--bg);
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
-            background: #000; /* Fallback */
-            font-family: 'Quicksand', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px; /* Untuk efek 3D card */
         }
 
-        /* -- Parallax Galaxy Background -- */
-        #galaxy-bg {
+        /* Background Animasi Gradient */
+        .bg-glow {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 110%; /* Lebih lebar untuk efek paralaks */
-            height: 110%;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px),
-                radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 3px);
-            background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
-            background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
-            z-index: -2;
-            transition: transform 0.1s ease-out; /* Untuk gerak halus cursor */
-        }
-
-        /* -- Overlay Ungu/Pink Romantis -- */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(41, 0, 37, 0.9) 0%, rgba(121, 9, 56, 0.7) 100%);
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            filter: blur(150px);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.2;
             z-index: -1;
+            animation: pulseBg 8s infinite alternate;
         }
 
-        /* -- Container Utama -- */
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
+        @keyframes pulseBg {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
+            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.4; }
         }
 
-        /* -- Cinematic Glassmorphism Card -- */
+        /* Glass Card */
         .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 50px;
-            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 50px rgba(255, 20, 147, 0.3);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 24px;
             text-align: center;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            transform-style: preserve-3d;
-            max-width: 500px;
-            width: 90%;
+            width: 350px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            transition: 0.5s;
         }
 
-        .card:hover {
-            box-shadow: 0 0 80px rgba(255, 20, 147, 0.6);
-        }
-
-        /* -- Judul -- */
         h1 {
-            font-family: 'Pacifico', cursive;
-            color: #fff;
-            text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493, 0 0 30px #ff1493;
-            font-size: 3.5rem;
-            margin-top: 0;
+            font-weight: 800;
+            letter-spacing: -1px;
             margin-bottom: 10px;
+            font-size: 2rem;
         }
 
-        h2 {
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 300;
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-        }
-
-        /* -- Pesan (Hidden initially) -- */
-        #typing-text {
-            color: #fff;
-            font-size: 1.3rem;
-            line-height: 1.8;
+        .status {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--primary);
             margin-bottom: 30px;
-            min-height: 150px; /* Jaga tinggi agar card tidak lompat */
-            text-shadow: 0 0 5px rgba(255,255,255,0.5);
-            display: none; /* Sembunyikan dulu */
+            display: block;
         }
 
-        .caret {
-            display: inline-block;
-            width: 3px;
-            background-color: #ff1493;
-            animation: blink 0.7s infinite;
+        #message {
+            font-weight: 300;
+            line-height: 1.6;
+            font-size: 1rem;
+            min-height: 80px;
+            margin-bottom: 30px;
         }
 
-        /* -- Signature -- */
-        #signature {
-            font-weight: 600;
-            color: #ff69b4;
-            display: none;
+        /* Button Styling */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            position: relative;
         }
 
-        /* -- Tombol Interaktif -- */
-        .btn-open {
-            background: transparent;
-            border: 2px solid #fff;
-            color: #fff;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
+        button {
+            padding: 12px 25px;
+            border-radius: 12px;
+            border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            transition: 0.3s;
         }
 
-        .btn-open:hover {
-            background: #fff;
-            color: #290025;
-            box-shadow: 0 0 20px #fff, 0 0 40px #ff1493;
-            transform: scale(1.05);
+        #btnYes {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3);
         }
 
-        /* -- Love Balloons Animation -- */
-        .balloon {
-            position: fixed;
-            bottom: -100px;
-            font-size: 30px;
-            opacity: 0.8;
-            user-select: none;
+        #btnNo {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            position: relative;
+        }
+
+        /* Lucu: Tombol 'No' lari */
+        #btnNo.move {
+            position: absolute;
+        }
+
+        /* Floating Hearts */
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
             pointer-events: none;
-            animation: floatUp ease-in infinite;
-            z-index: 1;
-        }
-
-        /* -- KEYFRAMES -- */
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+            z-index: -1;
+            animation: floatUp 4s linear forwards;
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
-            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
-        }
-
-        @keyframes cardSpawn {
-            0% { transform: translateZ(-500px) translateY(100px) rotateX(-90deg); opacity: 0; }
-            100% { transform: translateZ(0) translateY(0) rotateX(0deg); opacity: 1; }
-        }
-
-        /* Animasi masuk card saat load */
-        .card-animate {
-            animation: cardSpawn 1s ease-out forwards;
-        }
-
-        /* -- Responsive -- */
-        @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; }
-            .card { padding: 30px; }
-            #typing-text { font-size: 1.1rem; }
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div id="galaxy-bg"></div>
-    <div class="overlay"></div>
+    <div class="bg-glow"></div>
 
-    <div class="container">
-        <div class="card card-animate" id="mainCard">
-            <h1>Nazwa Natania</h1>
-            <h2 id="subHeader">Ada sebuah pesan kecil untukmu...</h2>
-            
-            <div id="typing-text"></div>
-            <p id="signature">— Cintamu, Aditya ❤️</p>
-
-            <button class="btn-open" id="openBtn" onclick="mulaiKejutan()">Buka Pesan ✨</button>
+    <div class="card" id="mainCard">
+        <span class="status">Private Message</span>
+        <h1>Hi, Nazwa.</h1>
+        <p id="message">Lagi sibuk gak? Ada sesuatu yang mau gue bilang...</p>
+        
+        <div class="btn-group" id="btnContainer">
+            <button id="btnYes" onclick="nextStep()">Apaan?</button>
+            <button id="btnNo" onmouseover="moveButton()">Gak</button>
         </div>
     </div>
 
     <script>
-        // --- PESAN CINTA (Ganti sesukamu) ---
-        const paragraphs = [
-            "Nazwa, kamu tahu? Di alam semesta yang luas ini, bagi aku, kamu adalah bintang yang paling terang.",
-            "Setiap detik bersamamu adalah keajaiban yang nggak pernah bosan aku syukuri. Kamu bukan cuma pacarku, kamu adalah inspirasiku, tawaku, dan rumahku.",
-            "Aku ingin terus jalan di samping kamu, genggam tangan kamu, dan lewati ribuan hari kedepan sama-sama.",
-            "Aku sayang banget sama kamu, Nazwa Natania. Selamanya. ❤️"
-        ];
+        const messageText = document.getElementById('message');
+        const btnYes = document.getElementById('btnYes');
+        const btnNo = document.getElementById('btnNo');
+        let step = 0;
 
-        const typingElement = document.getElementById('typing-text');
-        const openBtn = document.getElementById('openBtn');
-        const subHeader = document.getElementById('subHeader');
-        const signature = document.getElementById('signature');
-        const mainCard = document.getElementById('mainCard');
-        
-        let charIndex = 0;
-        let paraIndex = 0;
-        let isTyping = false;
-
-        // -- Fungsi Memulai Kejutan --
-        function mulaiKejutan() {
-            if (isTyping) return;
-            isTyping = true;
-
-            // Sembunyikan tombol dan subheader dengan halus
-            openBtn.style.display = 'none';
-            subHeader.style.opacity = '0';
-            setTimeout(() => subHeader.style.display = 'none', 500);
-
-            // Tampilkan elemen pesan
-            typingElement.style.display = 'block';
-            
-            // Mulai ngetik setelah jeda sedikit
-            setTimeout(typeParagraph, 500);
-        }
-
-        // -- Efek Mengetik Paragraf --
-        function typeParagraph() {
-            if (paraIndex < paragraphs.length) {
-                let currentPara = paragraphs[paraIndex];
-                if (charIndex < currentPara.length) {
-                    typingElement.innerHTML += currentPara.charAt(charIndex);
-                    charIndex++;
-                    setTimeout(typeParagraph, 50); // Kecepatan ngetik
-                } else {
-                    // Selesai satu paragraf, tambah baris baru
-                    typingElement.innerHTML += '<br><br>';
-                    paraIndex++;
-                    charIndex = 0;
-                    setTimeout(typeParagraph, 700); // Jeda antar paragraf
-                }
-            } else {
-                // Semua selesai diketik
-                typingElement.innerHTML += '<span class="caret"></span>';
-                signature.style.display = 'block';
-                signature.style.opacity = '0';
-                setTimeout(() => {
-                    signature.style.transition = 'opacity 1s ease';
-                    signature.style.opacity = '1';
-                }, 500);
-                
-                // Tambah balon hati lebih banyak di akhir
-                setInterval(createBalloon, 150);
+        // Fungsi biar tombol No lari (Lucu)
+        function moveButton() {
+            if (step < 2) {
+                const x = Math.random() * (window.innerWidth - 100);
+                const y = Math.random() * (window.innerHeight - 50);
+                btnNo.classList.add('move');
+                btnNo.style.left = `${x}px`;
+                btnNo.style.top = `${y}px`;
             }
         }
 
-        // -- Efek Parallax Background (Gerak saat mouse gerak) --
-        const galaxyBg = document.getElementById('galaxy-bg');
-        document.addEventListener('mousemove', (e) => {
-            if (window.innerWidth < 1000) return; // Matikan di mobile agar enteng
-
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
-            
-            // Hitung seberapa jauh background harus gerak (kebalikan arah mouse)
-            const moveX = (window.innerWidth / 2 - mouseX) * 0.02;
-            const moveY = (window.innerHeight / 2 - mouseY) * 0.02;
-            
-            galaxyBg.style.transform = `translate(${moveX}px, ${moveY}px)`;
-            
-            // Efek tilt card sedikit
-            const tiltX = (window.innerHeight / 2 - mouseY) * 0.01;
-            const tiltY = (mouseX - window.innerWidth / 2) * 0.01;
-            mainCard.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
-        });
-
-        // -- Efek Balon Hati Melayang --
-        const colors = ['#ff1493', '#ff69b4', '#ffb6c1', '#ffffff'];
-        function createBalloon() {
-            const balloon = document.createElement('div');
-            balloon.classList.add('balloon');
-            
-            // Pilih acak antara ikon hati atau tulisan "Love"
-            const content = Math.random() > 0.3 ? '❤️' : '💖';
-            balloon.innerHTML = content;
-            
-            balloon.style.left = Math.random() * 100 + 'vw';
-            balloon.style.color = colors[Math.floor(Math.random() * colors.length)];
-            balloon.style.fontSize = Math.random() * 20 + 20 + 'px';
-            balloon.style.animationDuration = Math.random() * 4 + 4 + 's'; // Antara 4-8 detik
-            
-            document.body.appendChild(balloon);
-
-            // Hapus elemen setelah animasi selesai agar tidak lemot
-            setTimeout(() => {
-                balloon.remove();
-            }, 8000);
+        function nextStep() {
+            step++;
+            if (step === 1) {
+                messageText.style.opacity = 0;
+                setTimeout(() => {
+                    messageText.innerHTML = "Sebenernya gak penting-penting banget sih, cuma mau bilang kalau lo itu keren banget hari ini. ⚡";
+                    btnYes.innerHTML = "Masa sih?";
+                    messageText.style.opacity = 1;
+                }, 300);
+            } 
+            else if (step === 2) {
+                messageText.style.opacity = 0;
+                setTimeout(() => {
+                    messageText.innerHTML = "Iya serius. Stay awesome ya, Nazwa Natania. <br><br> <b>I love you!</b> ❤️";
+                    btnYes.innerHTML = "Love you too!";
+                    btnNo.style.display = "none";
+                    messageText.style.opacity = 1;
+                    triggerConfetti();
+                }, 300);
+            }
+            else if (step === 3) {
+                // Ending
+                document.getElementById('mainCard').style.transform = "scale(0.9)";
+                messageText.innerHTML = "Cieee senyum-senyum sendiri pas baca ini! <br> Kabarin ya kalau udah baca. 😉";
+                btnYes.style.display = "none";
+                setInterval(createHeart, 200);
+            }
         }
 
-        // Jalankan balon hati pelan-pelan sejak awal
-        setInterval(createBalloon, 500);
+        function triggerConfetti() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff4d6d', '#ffffff', '#ff8fa3']
+            });
+        }
 
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
     </script>
 </body>
 </html>
