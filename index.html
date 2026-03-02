@@ -3,120 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untuk Nazwa Natania Tersayang</title>
+    <title>Untuk Malaikatku, Nazwa Natania</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;600&display=swap');
 
-        body {
+        /* -- Setup Dasar -- */
+        body, html {
             margin: 0;
             padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000; /* Fallback */
+            font-family: 'Quicksand', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background: radial-gradient(circle, #ffafbd, #ffc3a0);
-            font-family: 'Quicksand', sans-serif;
-            overflow: hidden;
-            color: #d63384;
+            perspective: 1000px; /* Untuk efek 3D card */
         }
 
+        /* -- Parallax Galaxy Background -- */
+        #galaxy-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 110%; /* Lebih lebar untuk efek paralaks */
+            height: 110%;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px),
+                radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 3px);
+            background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+            background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+            z-index: -2;
+            transition: transform 0.1s ease-out; /* Untuk gerak halus cursor */
+        }
+
+        /* -- Overlay Ungu/Pink Romantis -- */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(41, 0, 37, 0.9) 0%, rgba(121, 9, 56, 0.7) 100%);
+            z-index: -1;
+        }
+
+        /* -- Container Utama -- */
         .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             z-index: 10;
-            max-width: 80%;
-            border: 2px solid #fff;
         }
 
+        /* -- Cinematic Glassmorphism Card -- */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 50px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 50px rgba(255, 20, 147, 0.3);
+            text-align: center;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            transform-style: preserve-3d;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .card:hover {
+            box-shadow: 0 0 80px rgba(255, 20, 147, 0.6);
+        }
+
+        /* -- Judul -- */
         h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
+            font-family: 'Pacifico', cursive;
+            color: #fff;
+            text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493, 0 0 30px #ff1493;
+            font-size: 3.5rem;
+            margin-top: 0;
             margin-bottom: 10px;
         }
 
-        #typing-text {
+        h2 {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
             font-size: 1.2rem;
-            line-height: 1.6;
-            min-height: 60px;
+            margin-bottom: 40px;
         }
 
-        .heart-icon {
-            font-size: 50px;
-            color: #e91e63;
-            animation: pulse 1.5s infinite;
+        /* -- Pesan (Hidden initially) -- */
+        #typing-text {
+            color: #fff;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            min-height: 150px; /* Jaga tinggi agar card tidak lompat */
+            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+            display: none; /* Sembunyikan dulu */
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
+        .caret {
+            display: inline-block;
+            width: 3px;
+            background-color: #ff1493;
+            animation: blink 0.7s infinite;
         }
 
-        /* Animasi Hati Jatuh */
-        .heart {
-            position: absolute;
-            top: -10px;
-            font-size: 20px;
+        /* -- Signature -- */
+        #signature {
+            font-weight: 600;
+            color: #ff69b4;
+            display: none;
+        }
+
+        /* -- Tombol Interaktif -- */
+        .btn-open {
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .btn-open:hover {
+            background: #fff;
+            color: #290025;
+            box-shadow: 0 0 20px #fff, 0 0 40px #ff1493;
+            transform: scale(1.05);
+        }
+
+        /* -- Love Balloons Animation -- */
+        .balloon {
+            position: fixed;
+            bottom: -100px;
+            font-size: 30px;
+            opacity: 0.8;
             user-select: none;
             pointer-events: none;
-            animation: fall linear forwards;
+            animation: floatUp ease-in infinite;
+            z-index: 1;
         }
 
-        @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-            }
+        /* -- KEYFRAMES -- */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes cardSpawn {
+            0% { transform: translateZ(-500px) translateY(100px) rotateX(-90deg); opacity: 0; }
+            100% { transform: translateZ(0) translateY(0) rotateX(0deg); opacity: 1; }
+        }
+
+        /* Animasi masuk card saat load */
+        .card-animate {
+            animation: cardSpawn 1s ease-out forwards;
+        }
+
+        /* -- Responsive -- */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .card { padding: 30px; }
+            #typing-text { font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
 
+    <div id="galaxy-bg"></div>
+    <div class="overlay"></div>
+
     <div class="container">
-        <div class="heart-icon">❤️</div>
-        <h1>Untuk Nazwa Natania</h1>
-        <div id="typing-text"></div>
-        <p style="margin-top: 20px; font-weight: bold;">— Dari Aditya</p>
+        <div class="card card-animate" id="mainCard">
+            <h1>Nazwa Natania</h1>
+            <h2 id="subHeader">Ada sebuah pesan kecil untukmu...</h2>
+            
+            <div id="typing-text"></div>
+            <p id="signature">— Cintamu, Aditya ❤️</p>
+
+            <button class="btn-open" id="openBtn" onclick="mulaiKejutan()">Buka Pesan ✨</button>
+        </div>
     </div>
 
     <script>
-        // Pesan romantis
-        const message = "Nazwa, sejak ada kamu, duniaku jadi jauh lebih berwarna. Kamu adalah alasan tersenyumku setiap hari. Aku sayang banget sama kamu... ❤️";
-        const typingElement = document.getElementById('typing-text');
-        let index = 0;
+        // --- PESAN CINTA (Ganti sesukamu) ---
+        const paragraphs = [
+            "Nazwa, kamu tahu? Di alam semesta yang luas ini, bagi aku, kamu adalah bintang yang paling terang.",
+            "Setiap detik bersamamu adalah keajaiban yang nggak pernah bosan aku syukuri. Kamu bukan cuma pacarku, kamu adalah inspirasiku, tawaku, dan rumahku.",
+            "Aku ingin terus jalan di samping kamu, genggam tangan kamu, dan lewati ribuan hari kedepan sama-sama.",
+            "Aku sayang banget sama kamu, Nazwa Natania. Selamanya. ❤️"
+        ];
 
-        // Efek Mengetik
-        function typeWriter() {
-            if (index < message.length) {
-                typingElement.innerHTML += message.charAt(index);
-                index++;
-                setTimeout(typeWriter, 100);
+        const typingElement = document.getElementById('typing-text');
+        const openBtn = document.getElementById('openBtn');
+        const subHeader = document.getElementById('subHeader');
+        const signature = document.getElementById('signature');
+        const mainCard = document.getElementById('mainCard');
+        
+        let charIndex = 0;
+        let paraIndex = 0;
+        let isTyping = false;
+
+        // -- Fungsi Memulai Kejutan --
+        function mulaiKejutan() {
+            if (isTyping) return;
+            isTyping = true;
+
+            // Sembunyikan tombol dan subheader dengan halus
+            openBtn.style.display = 'none';
+            subHeader.style.opacity = '0';
+            setTimeout(() => subHeader.style.display = 'none', 500);
+
+            // Tampilkan elemen pesan
+            typingElement.style.display = 'block';
+            
+            // Mulai ngetik setelah jeda sedikit
+            setTimeout(typeParagraph, 500);
+        }
+
+        // -- Efek Mengetik Paragraf --
+        function typeParagraph() {
+            if (paraIndex < paragraphs.length) {
+                let currentPara = paragraphs[paraIndex];
+                if (charIndex < currentPara.length) {
+                    typingElement.innerHTML += currentPara.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeParagraph, 50); // Kecepatan ngetik
+                } else {
+                    // Selesai satu paragraf, tambah baris baru
+                    typingElement.innerHTML += '<br><br>';
+                    paraIndex++;
+                    charIndex = 0;
+                    setTimeout(typeParagraph, 700); // Jeda antar paragraf
+                }
+            } else {
+                // Semua selesai diketik
+                typingElement.innerHTML += '<span class="caret"></span>';
+                signature.style.display = 'block';
+                signature.style.opacity = '0';
+                setTimeout(() => {
+                    signature.style.transition = 'opacity 1s ease';
+                    signature.style.opacity = '1';
+                }, 500);
+                
+                // Tambah balon hati lebih banyak di akhir
+                setInterval(createBalloon, 150);
             }
         }
 
-        // Animasi Hati Berjatuhan
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-            heart.style.opacity = Math.random();
-            document.body.appendChild(heart);
+        // -- Efek Parallax Background (Gerak saat mouse gerak) --
+        const galaxyBg = document.getElementById('galaxy-bg');
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth < 1000) return; // Matikan di mobile agar enteng
 
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            // Hitung seberapa jauh background harus gerak (kebalikan arah mouse)
+            const moveX = (window.innerWidth / 2 - mouseX) * 0.02;
+            const moveY = (window.innerHeight / 2 - mouseY) * 0.02;
+            
+            galaxyBg.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            
+            // Efek tilt card sedikit
+            const tiltX = (window.innerHeight / 2 - mouseY) * 0.01;
+            const tiltY = (mouseX - window.innerWidth / 2) * 0.01;
+            mainCard.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+        });
+
+        // -- Efek Balon Hati Melayang --
+        const colors = ['#ff1493', '#ff69b4', '#ffb6c1', '#ffffff'];
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            
+            // Pilih acak antara ikon hati atau tulisan "Love"
+            const content = Math.random() > 0.3 ? '❤️' : '💖';
+            balloon.innerHTML = content;
+            
+            balloon.style.left = Math.random() * 100 + 'vw';
+            balloon.style.color = colors[Math.floor(Math.random() * colors.length)];
+            balloon.style.fontSize = Math.random() * 20 + 20 + 'px';
+            balloon.style.animationDuration = Math.random() * 4 + 4 + 's'; // Antara 4-8 detik
+            
+            document.body.appendChild(balloon);
+
+            // Hapus elemen setelah animasi selesai agar tidak lemot
             setTimeout(() => {
-                heart.remove();
-            }, 5000);
+                balloon.remove();
+            }, 8000);
         }
 
-        // Jalankan fungsi
-        window.onload = () => {
-            typeWriter();
-            setInterval(createHeart, 300);
-        };
+        // Jalankan balon hati pelan-pelan sejak awal
+        setInterval(createBalloon, 500);
+
     </script>
 </body>
 </html>
